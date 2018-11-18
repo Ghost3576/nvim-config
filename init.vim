@@ -3,32 +3,44 @@ set number
 set relativenumber
 set incsearch
 set hlsearch
+"Turn on Syntax highlighting
+syntax on
+"Show file Stats
+set ruler
 
+nmap ; :
+
+" Cursor motion
+set scrolloff=5
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+
+"
+"<======================= Plugins ==================>
 call plug#begin()
 
-" On-demand loading
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-nnoremap <C-p> : FZF --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254,info:254,prompt:37,spinner:108,pointer:235,marker:235<CR>
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle' }
-Plug 'zchee/deoplete-jedi'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-set runtimepath+=~/.config/nvim/plugged/deoplete.nvim/
-let g:deoplete#enable_at_startup = 1
-"<TAB> completion
 
+"Fuzzy File Searching
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
-call g:deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
-
-call deoplete#custom#var('clangx','default_c_options', '')
-call deoplete#custom#var('clangx','default_cpp_options', '')
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+nnoremap <C-p> :FZF --color dark,hl:250,hl+:1,fg+:2 <enter>
 
 call plug#end()
+"<==================================================>
+
+" For terminal emulator
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <C-j> <C-\><C-N><C-w>j
+inoremap <C-k> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 
